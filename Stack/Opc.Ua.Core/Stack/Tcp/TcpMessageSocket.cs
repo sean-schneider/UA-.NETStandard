@@ -758,6 +758,7 @@ namespace Opc.Ua.Bindings
         private SocketError BeginConnect(IPAddress address, AddressFamily addressFamily, int port, CallbackAction callback)
         {
             var socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
+            socket.Bind(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 8848));
             var args = new SocketAsyncEventArgs() {
                 UserToken = callback,
                 RemoteEndPoint = new IPEndPoint(address, port),
